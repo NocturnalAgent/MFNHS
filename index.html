@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Module Viewer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+        }
+
+        .left {
+            background-color: #ccc;
+            width: 25%;
+            overflow-x: scroll;
+        }
+
+        .right {
+            background-color: #eee;
+            width: 75%;
+            overflow-x: scroll;
+        }
+
+        .content {
+            width: 2000px;
+            /* Change this value as per your need */
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left {
+                width: 100%;
+            }
+
+            .right {
+                width: 100%;
+            }
+        }
+
+        form {
+            width: 80%;
+            margin: 0 auto;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type='text'],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        select {
+            height: 40px;
+        }
+
+        ol {
+            list-style: none;
+            counter-reset: item;
+            margin: 0;
+            padding: 0;
+        }
+
+        ol li {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+
+        ol li:hover {
+            background: #faeac7;
+        }
+
+        li {
+            display: flex;
+
+        }
+
+        li label {
+            margin: 0 20px 0 0;
+            cursor: pointer;
+        }
+
+        li input[type='radio'] {
+            margin: 0 5px 0 0;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        li::before {
+            content: counter(item) ". ";
+            counter-increment: item;
+            margin-right: 5px;
+            font-weight: bold;
+            width: 25px;
+        }
+
+
+        input[type='submit'] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        input[type='submit']:hover {
+            background-color: #3e8e41;
+        }
+
+        #timer {
+            font-size: 24px;
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3e8e41;
+            /* Dark green */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="right">
+            <div id="default-display"><img src="images/wallpaper.jpg"></div>
+            <object id="pdf-viewer" data="" type="application/pdf" width="100%" height="100%" style="display: none">
+                <p>Failed to load file<a href=""></a></p>
+            </object>
+        </div>
+        <div class="left">
+
+            <form>
+                <center>
+                    <img src="images/logo.png" alt="depedlogo" width="100" height="96">
+                    <h2>MODULE VIEWER</h2>
+                </center>
+                <h2>Module Selection</h2>
+              
+                <label for="subjects">Self-Learning Modules:</label>
+                <select id="subjects" name="subjects">
+                    <option>Select a subject</option>
+                    <option value="Modules/Grade 9/ICT9-Module1">ICT 9 MODULE 1</option>
+                    <option value="Modules/Grade 10/ICT10-Module1">ICT 10 MODULE 1</option>
+					<option value="Modules/Grade 11/ICT10-Module1">ICT 11 MODULE 1</option>
+                    
+                   
+
+                </select>
+
+                <p>Directions: Answer the following modules.</p>
+
+                <ol id="list"></ol>
+
+
+                 <script>
+                    //////////////Subject PDF Load
+                    // Get the select element and PDF viewer element
+                    var select = document.getElementById("subjects");
+                    var pdfViewer = document.getElementById("pdf-viewer");
+
+                    // Add an event listener to the select element
+                    select.addEventListener("change", function () {
+
+                        // Get the selected option value
+                        var selectedValue = select.value;
+
+                        // Set the PDF viewer data and href attributes to the selected subject
+                        pdfViewer.setAttribute("data", selectedValue + ".pdf");
+                        pdfViewer.querySelector("a").setAttribute("href", selectedValue + ".pdf");
+                        document.getElementById("default-display").style.display = "none";
+                        document.getElementById("pdf-viewer").style.display = "block";
+
+                    });
+
+                </script>
+
+            </form>
+
+        </div>
+    </div>
+</body>
+
+</html>
